@@ -1,0 +1,31 @@
+﻿@model IEnumerable<MyWebSite.Models.Portfolio>
+
+@{
+    ViewData["Title"] = "Portfolio";
+}
+
+<div class="row justify-content-md-center">
+    <div class="col-9">
+        <h1 class="text-center display-5 mb-3">@ViewData["Title"]</h1>
+        <div class="p-4 text-black bg-light fs-5 lh-base mb-3 text-black-50">
+            I’ve built and launched more than 30 projects. Since graduating from University, I have worked at tech companies in China and progressed from a junior to senior engineer. This ultimately lead to my being appointed to a position as head of engineering at a software company in Beijing.
+        </div>
+    </div>
+
+
+
+
+
+@foreach (var item in Model) {
+
+            <div class="row item justify-content-md-center mb-5 lh-base">
+                <div class="col-3">
+                    <ul class="list-unstyled">
+                        <li><img class="img-fluid shadow" src="@item.Pic" /></li>
+                        <li class="fs-6 lh-lg text-center">@Html.DisplayFor(modelItem => item.Title)</li>
+                    </ul>
+                </div>
+                <div class="col-7 fs-6">@Html.DisplayFor(modelItem => item.Description)</div>
+            </div>
+}
+</div>
