@@ -1,21 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyWebSite.Models;
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
+using MyWebSite.Data;
 
 namespace MyWebSite.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly MyWebSiteContext _context;
+
+        public HomeController(MyWebSiteContext context)
         {
-            _logger = logger;
+
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var model = new ListModel();
+            model.SkillModel = await _context.Skill.ToListAsync();
+            model.ArticleModel = await _context.Article.ToListAsync();
+            model.ExperienceModel = await _context.Experience.ToListAsync();
+            model.PortfolioModel = await _context.Portfolio.ToListAsync();
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -23,5 +32,6 @@ namespace MyWebSite.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

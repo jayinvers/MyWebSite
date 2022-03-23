@@ -20,5 +20,8 @@ namespace MyWebSite.Data
         public DbSet<MyWebSite.Models.Experience> Experience { get; set; }
 
         public DbSet<MyWebSite.Models.Portfolio> Portfolio { get; set; }
+
+        public DbSet<MyWebSite.Models.Skill> Skill { get; set; }
+
     }
 }

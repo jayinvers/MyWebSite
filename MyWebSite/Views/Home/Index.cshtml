@@ -1,8 +1,77 @@
-﻿@{
+﻿@model MyWebSite.Models.ListModel
+@{
     ViewData["Title"] = "Home Page";
     ViewData["Banner"] = "Home";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
 }
-
-<div>
-    <h1 class="display-4">Home</h1>
+<div class="about banner p-0">
+   <div class="p-4 p-md-5 text-white-50 bg-dark">
+    <div class="px-0 text-center">
+    <h2 class="display-4">Jay Liu</h2>
+    <div class="display-6 mb-4">Software Engineer</div>
+    <p class="fs-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+    </div>
+  </div>
 </div>
+
+<div class="skill pt-4 pb-4 mb-4 bg-light">
+    <h2 class="text-center display-4 pt-3 pb-3">Skills</h2>
+    <div class="row row-cols-3">
+        @foreach(var item in Model.SkillModel)
+        {
+            <div class="col pt-2 pb-2">
+                <ul class="list-unstyled">
+                    <li class="ps-5 pe-5"><span class="float-end text-black-50">(@Html.DisplayFor(modelItem => item.Percentage)%)</span>@Html.DisplayFor(modelItem => item.Name) </li>
+                    <li class="pe-5 ps-5"><div class="progress">
+  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="@item.Percentage" aria-valuemin="0" aria-valuemax="100" style="width: @item.Percentage%"></div>
+</div></li>
+
+                </ul>
+                
+            </div>
+           
+        }
+    </div>
+</div>
+
+
+<div class="experience p-0">
+    <h2 class="text-center display-4 pt-3 pb-3">Experience</h2>
+
+        @foreach (var item in Model.ExperienceModel)
+        {
+            <div class="row g-0 item justify-content-md-center mb-3 pb-3 pe-0 ps-0 lh-base border-bottom">
+                <div class="col-3">
+                    <ul class="list-unstyled">
+                        <li class="fs-5">@Html.DisplayFor(modelItem => item.Title)</li>
+                        <li class="fs-6 text-black-50">@Html.DisplayFor(modelItem => item.Location)</li>
+                        <li class="fs-6 text-black-50">@Html.DisplayFor(modelItem => item.Duration)</li>
+                    </ul>
+                </div>
+                <div class="col-7 lh-lg">@Html.DisplayFor(modelItem => item.Description)</div>
+            </div>
+
+        }
+  
+</div>
+
+<div class="portfolio p-4">
+    <h2 class="text-center display-4 p-3">Portfolio</h2>
+ <div class="row item justify-content-md-center mb-5 lh-base row-cols-3">
+    @foreach (var item in Model.PortfolioModel) {
+
+           
+                <div class="col">
+                    <ul class="list-unstyled">
+                        <li><img class="img-fluid shadow" src="@item.Pic" /></li>
+                        <li class="fs-6 lh-lg text-center">@Html.DisplayFor(modelItem => item.Title)</li>
+                    </ul>
+                </div>
+}
+</div>
+</div>
+
+
+
+
+

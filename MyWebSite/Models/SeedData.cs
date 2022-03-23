@@ -9,6 +9,62 @@ namespace MyWebSite.Models
     public static class SeedData
     {
 
+        private static Article[] getArticleMd(string dirPath)
+        {
+            DirectoryInfo dirInfo = new DirectoryInfo(dirPath);
+            FileInfo[] files = dirInfo.GetFiles();
+
+            List<Article> articles = new List<Article>();
+
+            foreach (FileInfo file in files)
+            {
+                Article article = new Article()
+                {
+                    Title = File.ReadAllText(file.FullName).Split("======").First().Replace("\n", "").Replace("# ", ""),
+                    Body = File.ReadAllText(file.FullName).Split("======").Last()
+                };
+                articles.Add(article);
+            }
+            return articles.ToArray();
+        }
+
+
+        private static Skill[] addSkill()
+        {
+            return new Skill[]
+            {
+                new Skill
+                {
+                    Name = "Java",
+                    Percentage = 90
+                },
+                new Skill
+                {
+                    Name = "Python",
+                    Percentage = 95
+                },
+                new Skill
+                {
+                    Name = "PHP",
+                    Percentage = 90
+                },
+                new Skill
+                {
+                    Name = "Mysql",
+                    Percentage = 90
+                },
+                new Skill
+                {
+                    Name = ".NET",
+                    Percentage = 80
+                },
+                new Skill
+                {
+                    Name = "Go lang",
+                    Percentage = 75
+                },
+            };
+        }
         private static Article[] addArticle()
         {
             return new Article[] { new Article
@@ -120,12 +176,14 @@ namespace MyWebSite.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<MyWebSiteContext>>()))
             {
-                if(!context.Experience.Any())
+                if (!context.Skill.Any())
+                    context.Skill.AddRange(addSkill());
+                if (!context.Experience.Any())
                     context.Experience.AddRange(addExperience());
                 if (!context.Portfolio.Any())
                     context.Portfolio.AddRange(addPortfolio());
                 if (!context.Article.Any())
-                    context.Article.AddRange(addArticle());
+                    context.Article.AddRange(getArticleMd("db\\md\\"));
                 context.SaveChanges();
 
                 

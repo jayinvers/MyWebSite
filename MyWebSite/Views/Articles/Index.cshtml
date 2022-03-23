@@ -20,7 +20,7 @@
                    @Html.DisplayFor(modelItem => item.Title)
                    </a>
                    </h2>
-               <div class="fs-5 lh-base"> @Html.DisplayFor(modelItem => item.Body)</div>
+               <div class="fs-5 lh-base"> @Html.Raw(Markdig.Markdown.ToHtml(item.Body))</div>
             </div>
 
 

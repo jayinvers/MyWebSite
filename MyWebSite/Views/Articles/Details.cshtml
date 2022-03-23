@@ -9,7 +9,7 @@
 
             <div class="col-9 mb-4">
                <h2 class="display-5 text-center">@Html.DisplayFor(model => model.Title)</h2>
-               <div class="fs-5 lh-base"> @Html.DisplayFor(model => model.Body)</div>
+               <div class="fs-5 lh-base"> @Html.Raw(Markdig.Markdown.ToHtml(Model.Body))</div>
             </div>
 
        </div>  
