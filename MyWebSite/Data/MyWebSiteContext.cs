@@ -23,5 +23,9 @@ namespace MyWebSite.Data
 
         public DbSet<MyWebSite.Models.Skill> Skill { get; set; }
 
+        public DbSet<MyWebSite.Models.Message> Message { get; set; }
+
+        
+
     }
 }

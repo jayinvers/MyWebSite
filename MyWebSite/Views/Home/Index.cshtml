@@ -14,16 +14,16 @@
   </div>
 </div>
 
-<div class="skill pt-4 pb-4 mb-4 bg-light">
-    <h2 class="text-center display-4 pt-3 pb-3">Skills</h2>
+<div class="skill pt-4 pb-5">
+    <h2 class="text-center display-5 pt-3 pb-3">Skills</h2>
     <div class="row row-cols-3">
         @foreach(var item in Model.SkillModel)
         {
             <div class="col pt-2 pb-2">
-                <ul class="list-unstyled">
+                <ul class="list-unstyled lh-lg">
                     <li class="ps-5 pe-5"><span class="float-end text-black-50">(@Html.DisplayFor(modelItem => item.Percentage)%)</span>@Html.DisplayFor(modelItem => item.Name) </li>
                     <li class="pe-5 ps-5"><div class="progress">
-  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="@item.Percentage" aria-valuemin="0" aria-valuemax="100" style="width: @item.Percentage%"></div>
+  <div class="progress-bar bg-black" role="progressbar" aria-valuenow="@item.Percentage" aria-valuemin="0" aria-valuemax="100" style="width: @item.Percentage%"></div>
 </div></li>
 
                 </ul>
@@ -36,11 +36,11 @@
 
 
 <div class="experience p-0">
-    <h2 class="text-center display-4 pt-3 pb-3">Experience</h2>
+    <h2 class="text-center display-5 pt-5 pb-5 mb-5 bg-light">Experience</h2>
 
         @foreach (var item in Model.ExperienceModel)
         {
-            <div class="row g-0 item justify-content-md-center mb-3 pb-3 pe-0 ps-0 lh-base border-bottom">
+            <div class="row g-0 item justify-content-md-center mb-5 pb-5 pe-0 ps-0 lh-base border-bottom">
                 <div class="col-3">
                     <ul class="list-unstyled">
                         <li class="fs-5">@Html.DisplayFor(modelItem => item.Title)</li>
@@ -55,9 +55,9 @@
   
 </div>
 
-<div class="portfolio p-4">
-    <h2 class="text-center display-4 p-3">Portfolio</h2>
- <div class="row item justify-content-md-center mb-5 lh-base row-cols-3">
+<div class="portfolio">
+    <h2 class="text-center display-5 pb-5 pt-5 mb-3 text-white bg-secondary">Portfolio</h2>
+ <div class="row item justify-content-md-center mb-5 lh-base row-cols-3 pe-4 ps-4">
     @foreach (var item in Model.PortfolioModel) {
 
            

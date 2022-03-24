@@ -28,6 +28,7 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "DockerfileRunArguments": "-v D:\\projects\\IT709\\demo\\MyWebSite\\MyWebSite\\db:/app/db",
       "publishAllPorts": true,
       "useSSL": true
     }

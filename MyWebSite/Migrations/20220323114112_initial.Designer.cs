@@ -11,7 +11,7 @@ using MyWebSite.Data;
 namespace MyWebSite.Migrations
 {
     [DbContext(typeof(MyWebSiteContext))]
-    [Migration("20220317093331_initial")]
+    [Migration("20220323114112_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,6 +73,30 @@ namespace MyWebSite.Migrations
                     b.ToTable("Experience");
                 });
 
+            modelBuilder.Entity("MyWebSite.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Body")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Message");
+                });
+
             modelBuilder.Entity("MyWebSite.Models.Portfolio", b =>
                 {
                     b.Property<int>("Id")
@@ -98,6 +122,23 @@ namespace MyWebSite.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Portfolio");
+                });
+
+            modelBuilder.Entity("MyWebSite.Models.Skill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Percentage")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Skill");
                 });
 #pragma warning restore 612, 618
         }
