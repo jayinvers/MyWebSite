@@ -14,7 +14,8 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #faf8f2;
 }
 
 .navbar-brand {
@@ -27,8 +28,12 @@ body {
 .nav-link {
     font-size: 1.15rem;
 }
-
-
+.mainnav {
+    background-color: #faf8f2;
+}
 main {
     font: 21px Georgia,Cambria;
+}
+.messagebox {
+    background-color: #6f8c84;
 }

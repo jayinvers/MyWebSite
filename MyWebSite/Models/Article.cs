@@ -18,6 +18,7 @@ namespace MyWebSite.Models
 
         [DataType(DataType.Date)]
         public DateTime CreateAt { get; set; }
-        
+
+
     }
 }

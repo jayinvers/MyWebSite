@@ -29,17 +29,14 @@ namespace MyWebSite.Controllers
             try
             {
                 _context.SaveChanges();
+                ViewData["msg"] = $"A message from {fullName}, {email} has been sent successfully. <br /> Message Body: {message}";
             }
             catch (Exception ex)
             {
 
                 ViewData["msg"] = $"Some thing went wrong.{ex.Message}";
             }
-            finally
-            {
-                ViewData["msg"] = $"A message from {fullName}, {email} has been sent successfully. <br /> Message Body: {message}";
-
-            }
+            
             
             return View();
 

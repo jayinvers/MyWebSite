@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using MyWebSite.Data;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace MyWebSite.Models
@@ -13,6 +14,7 @@ namespace MyWebSite.Models
         {
             DirectoryInfo dirInfo = new DirectoryInfo(dirPath);
             FileInfo[] files = dirInfo.GetFiles();
+            
 
             List<Article> articles = new List<Article>();
 
@@ -133,7 +135,8 @@ namespace MyWebSite.Models
                     Title = "Software Developer",
                     Location = "Auckland",
                     Duration = "2019-2021",
-                    Description = "Design and development of SMS reminder system. The system provides APIs and management panels for commercial customers to complete SMS reminders. The system uses Flask as the back-end framework and React as the front-end development framework."
+                    Description = "Design and development of SMS reminder system. The system provides APIs and management panels for commercial customers to complete SMS reminders. The system uses Flask as the back-end framework and React as the front-end development framework.",
+                    CreateAt = DateTime.Now
 
                 },
                 new Experience
@@ -150,7 +153,7 @@ namespace MyWebSite.Models
                     Location = "Beijing, China",
                     Duration = "2008 - 2011",
                     Description = "Leader of the development team in charge of creating and managing their own MHIS (Management Hospital Information System)."
-
+                  
                 },
                 new Experience
                 {
