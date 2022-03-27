@@ -1,48 +1,22 @@
 ﻿@model MyWebSite.Models.Portfolio
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Model.Title;
+    ViewData["banner"] = "A Previous Project";
 }
 
-<h1>Details</h1>
+<partial name="_Banner" />
+<div class="main">
+    <div class="row justify-content-md-center">
+        <div class="row item justify-content-md-center mb-5 lh-base">
 
-<div>
-    <h4>Portfolio</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Pic)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Pic)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreateAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreateAt)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+            <div class="col-9 mb-4">
+                <h2 class="display-6 text-center">@Html.DisplayFor(model => model.Title)</h2>
+                <div class="text-center"><img class="img-fluid shadow" src="@Model.Pic" /></div>
+                <div class="fs-5 lh-base"> @Html.Raw(Markdig.Markdown.ToHtml(String.IsNullOrEmpty(Model.Content)?"None":Model.Content))</div>
+                <div class="fs-5 lh-base"><a asp-action="Index">Back to portfolio list</a></div>
+            </div>
+
+        </div>
+    </div>
 </div>

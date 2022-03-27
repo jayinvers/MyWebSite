@@ -2,16 +2,18 @@
 
 @{
     ViewData["Title"] = "Details";
+    ViewData["Banner"] = "Thoughts";
 }
-
-<div class="row justify-content-md-center">
-          <div class="row item justify-content-md-center mb-5 lh-base">
+<partial name="_Banner" />
+<div class="main">
+    <div class="row justify-content-md-center">
+        <div class="row item justify-content-md-center mb-5 lh-base">
 
             <div class="col-9 mb-4">
-               <h2 class="display-5 text-center">@Html.DisplayFor(model => model.Title)</h2>
-               <div class="fs-5 lh-base"> @Html.Raw(Markdig.Markdown.ToHtml(Model.Body))</div>
+                <h2 class="display-5 text-center">@Html.DisplayFor(model => model.Title)</h2>
+                <div class="fs-5 lh-base">  @Html.Raw(Markdig.Markdown.ToHtml(String.IsNullOrEmpty(Model.Body)?"None":Model.Body))</div>
             </div>
 
-       </div>  
+        </div>
+    </div>
 </div>
-

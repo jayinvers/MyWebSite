@@ -10,20 +10,19 @@ namespace MyWebSite.Data
 {
     public class MyWebSiteContext : DbContext
     {
-        public MyWebSiteContext (DbContextOptions<MyWebSiteContext> options)
-            : base(options)
+        public MyWebSiteContext (DbContextOptions<MyWebSiteContext> options) : base(options)
         {
         }
 
-        public DbSet<MyWebSite.Models.Article> Article { get; set; }
+        public DbSet<Article> Article { get; set; }
 
-        public DbSet<MyWebSite.Models.Experience> Experience { get; set; }
+        public DbSet<Experience> Experience { get; set; }
 
-        public DbSet<MyWebSite.Models.Portfolio> Portfolio { get; set; }
+        public DbSet<Portfolio> Portfolio { get; set; }
 
-        public DbSet<MyWebSite.Models.Skill> Skill { get; set; }
+        public DbSet<Skill> Skill { get; set; }
 
-        public DbSet<MyWebSite.Models.Message> Message { get; set; }
+        public DbSet<Message> Message { get; set; }
 
         
 

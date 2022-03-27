@@ -29,11 +29,19 @@ body {
     font-size: 1.15rem;
 }
 .mainnav {
-    background-color: #faf8f2;
+  
 }
-main {
-    font: 21px Georgia,Cambria;
+.main {
+    font-size: 20px;
+    font-family: charter, Georgia, Cambria, "Times New Roman", Times, serif;
+    color: rgba(41, 41, 41, 1);
 }
 .messagebox {
     background-color: #6f8c84;
 }
+
+
+
+
+
+

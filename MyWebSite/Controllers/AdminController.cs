@@ -25,10 +25,10 @@ namespace MyWebSite.Controllers
         public async Task<IActionResult> Messages(int page=1)
         {
             int pageIndex = page;
-            int pageSize = 2;
+            int pageSize = 10;
 
             IQueryable<Message> messageIQ = from m in _context.Message select m;
-            messageIQ = messageIQ.OrderByDescending(m => m.Id);
+            messageIQ = messageIQ.OrderByDescending(m => m.CreatedAt);
 
             int count = await messageIQ.CountAsync();
             int totalPages = (int)Math.Ceiling(count / (double)pageSize);

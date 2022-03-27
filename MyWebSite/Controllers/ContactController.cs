@@ -20,12 +20,15 @@ namespace MyWebSite.Controllers
         [HttpPost]
         public IActionResult LeaveMessage(string fullName, string email, string message)
         {
-            Message message1 = new Message();
-            message1.FullName = fullName;
-            message1.Email = email;
-            message1.Body = message;
-            message1.CreatedAt = DateTime.Now;
-            _context.Message.Add(message1);
+
+            _context.Message.Add(new Message()
+                {
+                    FullName = fullName,
+                    Email = email,
+                    Body = message,
+                    CreatedAt = DateTime.Now
+                }
+            );
             try
             {
                 _context.SaveChanges();
@@ -36,8 +39,8 @@ namespace MyWebSite.Controllers
 
                 ViewData["msg"] = $"Some thing went wrong.{ex.Message}";
             }
-            
-            
+
+
             return View();
 
         }

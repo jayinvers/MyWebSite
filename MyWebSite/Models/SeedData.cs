@@ -4,13 +4,25 @@ using MyWebSite.Data;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Bogus;
 
 namespace MyWebSite.Models
 {
     public static class SeedData
     {
 
-        private static Article[] getArticleMd(string dirPath)
+        private static List<Message> FakeMessages(int count)
+        {
+            
+            var messageFaker = new Faker<Message>()
+                .RuleFor(m => m.Email, f => f.Person.Email)
+                .RuleFor(m => m.FullName, f => f.Person.FullName)
+                .RuleFor(m => m.Body, f => f.Lorem.Paragraph())
+                .RuleFor(m => m.CreatedAt, f => f.Date.Past());
+            return messageFaker.Generate(count);
+
+        }
+        private static Article[] GetArticleMd(string dirPath)
         {
             DirectoryInfo dirInfo = new DirectoryInfo(dirPath);
             FileInfo[] files = dirInfo.GetFiles();
@@ -31,7 +43,7 @@ namespace MyWebSite.Models
         }
 
 
-        private static Skill[] addSkill()
+        private static Skill[] AddSkill()
         {
             return new Skill[]
             {
@@ -67,7 +79,7 @@ namespace MyWebSite.Models
                 },
             };
         }
-        private static Article[] addArticle()
+        private static Article[] AddArticle()
         {
             return new Article[] { new Article
                 {
@@ -89,28 +101,43 @@ namespace MyWebSite.Models
         };
         }
 
-        private static Portfolio[] addPortfolio()
+        private static Portfolio[] AddPortfolio()
         {
             return new Portfolio[] { new Portfolio
                 {
-                Title = "Hospital Information Management System",
-                Description = "Haiyi (Yuemei) Ltd，- Advertisement Management System [ Ruby On Rails, MySQL, Java (Desktop client), JavaScript (Bootstrap for front-end) ]",
+                Title = "DOCCMS",
+                Description = "Doccms is a popular open-source content management system in China. It was established in 2006 and has a history of 15 years. According to incomplete statistics, it has more than 40,000 website users. I am one of the founders and use PHP+Mysql to code the entire system. url: https://www.doccms.com",
                 Pic = "/pic/cases/01.png"
                 },
                 new Portfolio{
-                Title = "Case 2",
-                Description = "Haiyi (Yuemei) Ltd，- Advertisement Management System [ Ruby On Rails, MySQL, Java (Desktop client), JavaScript (Bootstrap for front-end) ]",
+                Title = "MaxCMS (JAVA)",
+                Description = "Built in 2019, it is a full-featured blog system, which is implemented by SpringBoot + Apache Shiro + Mybatis Plus + Thymeleaf + Bootstrap. I call it MaxCMS. It is a personal project and I have used it to make some simple websites for some businesses.",
                 Pic = "/pic/cases/02.png"
                 },
                 new Portfolio{
-                Title = "Case 3",
-                Description = "Haiyi (Yuemei) Ltd，- Advertisement Management System [ Ruby On Rails, MySQL, Java (Desktop client), JavaScript (Bootstrap for front-end) ]",
+                Title = "Interview Questionnaire System",
+                Description = "Established in 2020, it is an online exam system for a Chinese company to conduct remote interviews for the company during the COVID-19 period. It is based on PHP + Mysql, which includes my custom template system. On the front end, Bootstrap is used for CSS and JS development. ",
                 Pic = "/pic/cases/03.png"
+                },
+                new Portfolio{
+                Title = "Enterprise website management system",
+                Description = "Established in 2019, it is another PHP version of CMS, but it is lighter. It uses PHP+SQLite and can be easily deployed to the server without excessive configuration. Of course, it also supports Mysql. The front end uses Bootstrap. This is a personal project. ",
+                Pic = "/pic/cases/02.png"
+                },
+                new Portfolio{
+                Title = "WorkLog",
+                Description = "Established in 2020, a remote work log reporting system established for a company during the COVID19 period. It is a very simple system, but it is very useful and is used daily by the company. It uses Python + Flask + VUE + VUX + ELEMENTUI technology stack.",
+                Pic = "/pic/cases/03.png"
+                },
+                new Portfolio{
+                Title = "Safeheron Website",
+                Description = "The project started in May 2021. Safeheron is a blockchain security product of Xuanbing Technology. It is committed to providing customers with more secure digital asset Custody solutions. I am responsible for the front-end part of this project, mainly using VUE to convert design drawings to web pages. It is an exciting project. Under the project confidentiality agreement, could not to display the management panel. ",
+                Pic = "/pic/cases/01.png"
                 },
 
         };
         }
-        private static Experience[] addExperience()
+        private static Experience[] AddExperience()
         {
 
 
@@ -175,21 +202,21 @@ namespace MyWebSite.Models
         }
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new MyWebSiteContext(
-                serviceProvider.GetRequiredService<
-                    DbContextOptions<MyWebSiteContext>>()))
-            {
+            using (var context = new MyWebSiteContext(serviceProvider.GetRequiredService<DbContextOptions<MyWebSiteContext>>())){
+
                 if (!context.Skill.Any())
-                    context.Skill.AddRange(addSkill());
+                    context.Skill.AddRange(AddSkill());
                 if (!context.Experience.Any())
-                    context.Experience.AddRange(addExperience());
+                    context.Experience.AddRange(AddExperience());
                 if (!context.Portfolio.Any())
-                    context.Portfolio.AddRange(addPortfolio());
+                    context.Portfolio.AddRange(AddPortfolio());
                 if (!context.Article.Any())
-                    context.Article.AddRange(getArticleMd("db\\md\\"));
-                context.SaveChanges();
+                    context.Article.AddRange(GetArticleMd("db\\md\\"));
+                if (!context.Message.Any())
+                    context.Message.AddRange(FakeMessages(100));
 
                 
+                context.SaveChanges();
             }
         }
     }
