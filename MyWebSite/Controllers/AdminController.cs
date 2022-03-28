@@ -27,16 +27,18 @@ namespace MyWebSite.Controllers
             int pageIndex = page;
             int pageSize = 10;
 
+
             IQueryable<Message> messageIQ = from m in _context.Message select m;
-            messageIQ = messageIQ.OrderByDescending(m => m.CreatedAt);
+           
 
             int count = await messageIQ.CountAsync();
-            int totalPages = (int)Math.Ceiling(count / (double)pageSize);
-
-            messageIQ = messageIQ.Skip((pageIndex-1)*pageSize).Take(pageSize);
-
-            ViewData["PaginationTotalPage"] = totalPages;
+            ViewData["PaginationTotalPage"] = (int)Math.Ceiling(count / (double)pageSize);
             ViewData["PaginationIndex"] = pageIndex;
+
+            
+            messageIQ = messageIQ.OrderByDescending(m => m.CreatedAt)
+                .Skip((pageIndex-1)*pageSize)
+                .Take(pageSize);
 
             return View(await messageIQ.AsNoTracking().ToListAsync());
         }
