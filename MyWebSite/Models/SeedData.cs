@@ -10,7 +10,16 @@ namespace MyWebSite.Models
 {
     public static class SeedData
     {
+        private static List<Article> FakeArticles(int count)
+        {
 
+            var articleFaker = new Faker<Article>()
+                .RuleFor(m => m.Title, f => f.Lorem.Sentence())
+                .RuleFor(m => m.Body, f => f.Lorem.Paragraph())
+                .RuleFor(m => m.Author, "Jay Liu");
+            return articleFaker.Generate(count);
+
+        }
         private static List<Message> FakeMessages(int count)
         {
             
@@ -211,7 +220,7 @@ namespace MyWebSite.Models
                 if (!context.Portfolio.Any())
                     context.Portfolio.AddRange(AddPortfolio());
                 if (!context.Article.Any())
-                    context.Article.AddRange(GetArticleMd("db\\md\\"));
+                    context.Article.AddRange(FakeArticles(20));
                 if (!context.Message.Any())
                     context.Message.AddRange(FakeMessages(100));
 
