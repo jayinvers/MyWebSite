@@ -1,4 +1,5 @@
-﻿@model IEnumerable<MyWebSite.Models.Message>
+﻿@model PagedList.PagedList<MyWebSite.Models.Message>
+
 
 @{
     ViewData["Title"] = "Messages Review";
@@ -12,7 +13,7 @@
 </nav>
 
 
-@foreach (var item in Model)
+@foreach (var item in Model.ToArray())
 {
     <div class="row justify-content-md-center lh-base">
         <div class="col-3">
@@ -31,10 +32,10 @@
         <nav aria-label="Page navigation">
             <ul class="pagination">
 
-                @if ((int)ViewData["PaginationIndex"] > 1)
+                @if (Model.HasPreviousPage)
                 {
                     <li class="page-item">
-                        <a class="page-link" href="?page=@((int)ViewData["PaginationIndex"]-1)" aria-label="Previous">
+                        <a class="page-link" href="?page=@(Model.PageIndex-1)" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
@@ -47,9 +48,9 @@
                 }
 
                 </li>
-                @for (var i = 1; i < (int)ViewData["PaginationTotalPage"] + 1; i++)
+                @for (var i = 1; i < Model.TotalPages + 1; i++)
                 {
-                    if ((int)ViewData["PaginationIndex"] == i)
+                    if (Model.PageIndex == i)
                     {
                         <li class="page-item active" aria-current="page">
                             <a class="page-link" href="#">@i</a>
@@ -62,10 +63,10 @@
 
                 }
 
-                @if ((int)ViewData["PaginationIndex"] < (int)ViewData["PaginationTotalPage"])
+                @if (Model.HasNextPage)
                 {
                     <li class="page-item">
-                        <a class="page-link" href="page=@((int)ViewData["PaginationIndex"]+1)" aria-label="Next">
+                        <a class="page-link" href="page=@(Model.PageIndex+1)" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>

@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyWebSite.Data;
 using MyWebSite.Models;
+using PagedList;
+
 
 namespace MyWebSite.Controllers
 {
@@ -15,6 +17,8 @@ namespace MyWebSite.Controllers
     public class AdminController : Controller
     {
         private readonly MyWebSiteContext _context;
+
+        private PagedList<Message> messages;
 
         public AdminController(MyWebSiteContext context)
         {
@@ -32,15 +36,13 @@ namespace MyWebSite.Controllers
            
 
             int count = await messageIQ.CountAsync();
-            ViewData["PaginationTotalPage"] = (int)Math.Ceiling(count / (double)pageSize);
-            ViewData["PaginationIndex"] = pageIndex;
 
-            
-            messageIQ = messageIQ.OrderByDescending(m => m.CreatedAt)
-                .Skip((pageIndex-1)*pageSize)
-                .Take(pageSize);
 
-            return View(await messageIQ.AsNoTracking().ToListAsync());
+            messageIQ = messageIQ.OrderByDescending(m => m.CreatedAt);
+
+            messages = await PagedList<Message>.CreateAsync(messageIQ.AsNoTracking(),pageIndex, pageSize);
+
+            return View(messages);
         }
 
     }
