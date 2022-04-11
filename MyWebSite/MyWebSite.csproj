@@ -12,6 +12,8 @@
   <ItemGroup>
     <PackageReference Include="Bogus" Version="34.0.1" />
     <PackageReference Include="Markdig" Version="0.28.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

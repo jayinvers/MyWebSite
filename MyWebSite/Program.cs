@@ -1,16 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MyWebSite.Data;
 using MyWebSite.Models;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+var ConnectionString = builder.Configuration.GetConnectionString("MyWebSiteContextSqlite");
 
 // builder.Services.AddDbContext<MyWebSiteContext>(options =>
 //    options.UseSqlServer(builder.Configuration.GetConnectionString("MyWebSiteContext")));
 
  builder.Services.AddDbContext<MyWebSiteContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("MyWebSiteContextSqlite")));
-
+    options.UseSqlite(ConnectionString));
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<MyWebSiteContext>();
+builder.Services.AddDbContext<MyWebSiteContext>(options =>
+    options.UseSqlite(ConnectionString));
 /*builder.Services.AddDbContext<MyWebSiteContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("MyWebSiteContextMySQL"), new MySqlServerVersion(new Version(8, 0, 22))));*/
 
@@ -37,11 +42,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapRazorPages();
 
 app.Run();

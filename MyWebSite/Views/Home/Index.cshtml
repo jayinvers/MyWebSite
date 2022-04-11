@@ -19,7 +19,7 @@
         @foreach (var item in Model.SkillModel)
         {
             <div class="col pt-2 pb-2">
-                <ul class="list-unstyled lh-lg">
+                <ul class="bars_list list-unstyled lh-lg">
                     <li class="ps-5 pe-5"><span class="float-end text-secondary">(@Html.DisplayFor(modelItem => item.Percentage)%)</span>@Html.DisplayFor(modelItem => item.Name) </li>
                     <li class="pe-5 ps-5">
                         <div class="progress border border-secondary bg-transparent opacity-50">
@@ -61,8 +61,6 @@
     <div class="row item justify-content-md-center mb-5 lh-base row-cols-3 pe-4 ps-4">
         @foreach (var item in Model.PortfolioModel)
         {
-
-
             <div class="col">
                 <ul class="list-unstyled">
                     <li><img class="img-fluid shadow" src="@item.Pic" /></li>
