@@ -4,4 +4,8 @@
 // Write your JavaScript code.
 $( document ).ready(function() {
     $('.progress').addClass('hover');
+    $('.progress-bar').addClass('progress-bar-animated');
+    setTimeout(function() {
+        $('.progress-bar').removeClass('progress-bar-animated');
+    }, 2000);
 });

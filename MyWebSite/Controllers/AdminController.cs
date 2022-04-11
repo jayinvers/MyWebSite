@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using MyWebSite.Data;
 using MyWebSite.Models;
@@ -26,6 +27,7 @@ namespace MyWebSite.Controllers
         }
 
         // GET: Admin/Messages
+        [Authorize]
         public async Task<IActionResult> Messages(int page=1)
         {
             int pageIndex = page;
@@ -33,7 +35,6 @@ namespace MyWebSite.Controllers
 
 
             IQueryable<Message> messageIQ = from m in _context.Message select m;
-           
 
             int count = await messageIQ.CountAsync();
 

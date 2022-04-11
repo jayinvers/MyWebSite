@@ -11,7 +11,8 @@ using MyWebSite.Models;
 
 namespace MyWebSite.Data
 {
-    public class MyWebSiteContext : IdentityDbContext<IdentityUser>
+    // public class MyWebSiteContext : DbContext 
+    public class MyWebSiteContext : IdentityDbContext<IdentityUser> 
     {
         public MyWebSiteContext(DbContextOptions<MyWebSiteContext> options) : base(options)
         {

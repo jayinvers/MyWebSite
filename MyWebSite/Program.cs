@@ -3,14 +3,12 @@ using Microsoft.Extensions.DependencyInjection;
 using MyWebSite.Data;
 using MyWebSite.Models;
 using Microsoft.AspNetCore.Identity;
-
 var builder = WebApplication.CreateBuilder(args);
 var ConnectionString = builder.Configuration.GetConnectionString("MyWebSiteContextSqlite");
-
 // builder.Services.AddDbContext<MyWebSiteContext>(options =>
 //    options.UseSqlServer(builder.Configuration.GetConnectionString("MyWebSiteContext")));
 
- builder.Services.AddDbContext<MyWebSiteContext>(options =>
+builder.Services.AddDbContext<MyWebSiteContext>(options =>
     options.UseSqlite(ConnectionString));
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<MyWebSiteContext>();
